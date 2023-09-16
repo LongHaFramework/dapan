@@ -59,6 +59,7 @@
         <h1>LONGHAFRAMEWORK</h1>
     </div>
     
+    <div class="container mt-5">
         <div class="alert">
             <strong>Cảnh báo!</strong> Dữ liệu có thể không đúng hoàn toàn hoặc thiếu thông tin.
         </div>
@@ -73,14 +74,17 @@
             </div>
         </div>
     </div>
-<div class="container mt-5">
-<ul class="list-group">
-            <li class="list-group-item">Đang cập nhật đáp án!</li>
-        </ul>
+    <div class="container mt-5">
+    <ul class="list-group">
+        <li class="list-group-item">Đang cập nhật đáp án!</li>
+    </ul>
+
     <script>
         function checkPing() {
             const pingStatusElement = document.getElementById("pingStatus");
             const urlToPing = "https://test.hocvalamtheobac.vn/";
+
+            pingStatusElement.innerText = "Đang kiểm tra...(vui lòng đợi 15-30s)";
 
             fetch(urlToPing)
                 .then(response => {
@@ -99,7 +103,7 @@
         }
 
         function reloadData() {
-            checkPing();
+            window.location.reload();
         }
 
         // Kiểm tra ping khi trang web được tải
