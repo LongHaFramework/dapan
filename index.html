@@ -19,20 +19,11 @@
             text-align: center;
         }
 
-        .alert {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 2px solid #f5c6cb;
-            border-radius: 10px;
-            padding: 10px;
-            margin-top: 20px;
-        }
-
         .custom-button {
-            background-color: #007BFF; /* Màu nền xanh nước biển cho nút */
-            color: white; /* Màu chữ trắng cho nút */
-            padding: 10px 20px; /* Kích thước nút */
-            border-radius: 10px; /* Độ cong viền */
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
         }
 
         .ping-status {
@@ -47,65 +38,224 @@
         }
 
         .highlighted {
-            background-color: #f0f0f0; /* Màu nền nổi bật */
+            background-color: #f0f0f0;
             padding: 10px;
             border-radius: 10px;
         }
+
+        /* Thêm CSS cho hiệu ứng loading */
+        @keyframes loading {
+            0% { content: "."; }
+            20% { content: ".."; }
+            40% { content: "..."; }
+            60% { content: "...."; }
+            80% { content: "....."; }
+            100% { content: "......"; }
+        }
+
+        .loading::after {
+            content: " ";
+            animation: loading 1s infinite;
+        }
+        
+        .horizontal-timeline .items {
+  border-top: 3px solid #e9ecef;
+}
+
+.horizontal-timeline .items .items-list {
+  display: block;
+  position: relative;
+  text-align: center;
+  padding-top: 70px;
+  margin-right: 0;
+}
+
+.horizontal-timeline .items .items-list:before {
+  content: "";
+  position: absolute;
+  height: 36px;
+  border-right: 2px dashed #dee2e6;
+  top: 0;
+}
+
+.horizontal-timeline .items .items-list .event-date {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  right: 0;
+  width: 75px;
+  margin: 0 auto;
+  font-size: 0.9rem;
+  padding-top: 8px;
+}
+
+@media (min-width: 1140px) {
+  .horizontal-timeline .items .items-list {
+    display: inline-block;
+    width: 24%;
+    padding-top: 45px;
+  }
+
+  .horizontal-timeline .items .items-list .event-date {
+    top: -40px;
+  }
+}
     </style>
     <title>Đáp án</title>
 </head>
 <body>
+    <!-- Header -->
     <div class="header">
         <h1>LONGHAFRAMEWORK</h1>
     </div>
-    
-    <div class="container mt-5">
-        <div class="alert">
-            <strong>Cảnh báo!</strong> Dữ liệu có thể không đúng hoàn toàn hoặc thiếu thông tin.
+
+    <!-- Modal thông báo thành công -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Lấy dữ liệu thành công</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Dữ liệu đã được tải thành công.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
         </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="container mt-2">
+        <div class="alert alert-danger" role="alert">
+            Dữ liệu có thể không đúng hoàn toàn!
+        </div>
+    </div>
+    
+    <div class="container mt-2">
         <div class="text-center">
             <a href="https://test.hocvalamtheobac.vn/" class="btn custom-button">Thi Ngay</a>
             <br><br>
             <div class="status-frame">
                 <h3>Trạng thái của trang hocvalamtheobac.vn hiện tại</h3>
-                <div class="ping-status highlighted" id="pingStatus">Đang kiểm tra...(vui lòng đợi 15-30s)</div>
+                <div class="ping-status highlighted" id="pingStatus">
+                    <div class="loading"></div> <!-- Hiệu ứng loading ở đây -->
+                    (vui lòng đợi 15-30s)
+                </div>
                 <br>
                 <button class="btn custom-button" onclick="reloadData()">Nếu bạn truy cập bằng zalo hãy ấn vào đây để load lại data đáp án</button>
             </div>
         </div>
     </div>
-    <div class="container mt-5">
+    
+    <!-- Thêm phần time line dưới phần đáp án -->
+<div class="container mt-2">
+    <div class="alert alert-primary" role="alert">
+        Đáp án:
+    </div>
     <ul class="list-group">
         <li class="list-group-item">Đang cập nhật đáp án!</li>
+        <li class="list-group-item">...</li>
     </ul>
+    
+    <div class="container-fluid py-5">
 
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="horizontal-timeline">
+
+        <ul class="list-inline items">
+          <li class="list-inline-item items-list">
+            <div class="px-4">
+              <div class="event-date badge bg-info">Cập nhật</div>
+              <h5 class="pt-2">Event One</h5>
+              <p class="text-muted">Phát triển chức năng đáp án.</p>
+              <div>
+                <a href="#" class="btn btn-primary btn-sm">Read more</a>
+              </div>
+            </div>
+          </li>
+          <li class="list-inline-item items-list">
+            <div class="px-4">
+              <div class="event-date badge bg-success">Cập nhật</div>
+              <h5 class="pt-2">Event Two</h5>
+              <p class="text-muted">Thêm cập nhật tình trạng trang HVLTB.
+              </p>
+              <div>
+                <a href="#" class="btn btn-primary btn-sm">Read more</a>
+              </div>
+            </div>
+          </li>
+          <li class="list-inline-item items-list">
+            <div class="px-4">
+              <div class="event-date badge bg-danger">Cập nhật</div>
+              <h5 class="pt-2">Event Three</h5>
+              <p class="text-muted">Cập nhật giao diện và thêm chức năng.</p>
+              <div>
+                <a href="#" class="btn btn-primary btn-sm">Read more</a>
+              </div>
+            </div>
+          </li>
+          <li class="list-inline-item items-list">
+            <div class="px-4">
+              <div class="event-date badge bg-warning">Cập nhật</div>
+              <h5 class="pt-2">Event Four</h5>
+              <p class="text-muted">Cập nhật reload data cho Zalo.
+              </p>
+              <div>
+                <a href="#" class="btn btn-primary btn-sm">Read more</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+    
+ 
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.min.js"></script>
     <script>
         function checkPing() {
             const pingStatusElement = document.getElementById("pingStatus");
             const urlToPing = "https://test.hocvalamtheobac.vn/";
 
-            pingStatusElement.innerText = "Đang kiểm tra...(vui lòng đợi 15-30s)";
+            pingStatusElement.innerHTML = '<div class="loading"></div>(vui lòng đợi 15-30s)';
 
             fetch(urlToPing)
                 .then(response => {
                     if (response.ok) {
                         pingStatusElement.innerText = "Trang web có thể truy cập bây giờ.";
-                        pingStatusElement.style.color = "green"; // Màu xanh nếu trang web có thể truy cập
+                        pingStatusElement.style.color = "green";
                     } else {
                         pingStatusElement.innerText = "Trang web không thể truy cập.";
-                        pingStatusElement.style.color = "red"; // Màu đỏ nếu trang web không thể truy cập
+                        pingStatusElement.style.color = "red";
                     }
                 })
                 .catch(error => {
                     pingStatusElement.innerText = "Trang web không thể truy cập.";
-                    pingStatusElement.style.color = "red"; // Màu đỏ nếu trang web không thể truy cập
+                    pingStatusElement.style.color = "red";
                 });
         }
 
         function reloadData() {
-            window.location.reload();
+            // Simulate a delay (you can replace this with actual data loading)
+            setTimeout(function () {
+                // After data is loaded successfully, show the success modal
+                $('#successModal').modal('show');
+            }, 1500); // Delay in milliseconds (3 seconds in this example)
         }
-
+       
         // Kiểm tra ping khi trang web được tải
         checkPing();
     </script>
